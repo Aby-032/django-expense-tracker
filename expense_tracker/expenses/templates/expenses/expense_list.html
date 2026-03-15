@@ -14,4 +14,13 @@
         {% endfor %}
     </ul>
 
+    <a href="{% url 'add_expense' %}"><button>Add Expense</button></a>
+
+    <form action="/accounts/logout" method="post">
+        
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+        
+    </form>
+
 {% endblock %}

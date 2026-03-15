@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required 
 from .models import Expense
 from .forms import ExpenseForm
-from django.http import HttpResponse
 
 # Create your views here.
 
@@ -10,11 +11,13 @@ def home(request):
     return HttpResponse("!!! HOME PAGE UNDER CONSTRUCTION !!!")
 
 # Expense List
+@login_required
 def expense_list(request):
-    expenses = Expense.objects.all()
+    expenses = Expense.objects.filter(user=request.user)
     return render(request, "expenses/expense_list.html", {"expenses": expenses})
 
 # Add Expense
+@login_required
 def add_expense(request):
 
     if request.method == "POST":
