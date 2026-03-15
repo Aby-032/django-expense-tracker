@@ -7,6 +7,7 @@ from .forms import ExpenseForm
 # Create your views here.
 
 # Home Page
+@login_required
 def home(request):
     return HttpResponse("!!! HOME PAGE UNDER CONSTRUCTION !!!")
 
@@ -24,7 +25,9 @@ def add_expense(request):
         form = ExpenseForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            expense = form.save(commit=False)
+            expense.user = request.user
+            expense.save()
             return redirect("expense_list")
 
     else:
