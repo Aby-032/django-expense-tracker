@@ -1,0 +1,17 @@
+{% extends './base.html' %}
+
+{% block title %}Expense List{% endblock%}
+
+{% block content %}
+
+    <h2>Your Expenses List</h2>
+
+    <ul>
+        {% for expense in expenses %}
+
+            <li>{{ expense.title }} - ₹{{ expense.amount }} {{ expense.category }}</li>
+    
+        {% endfor %}
+    </ul>
+
+{% endblock %}
